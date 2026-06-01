@@ -1,0 +1,11 @@
+name: AxPVP
+description: $description
+prefix: AxPVP
+version: '${version}'
+
+main: de.jaunikapauni.axpvp.AxPVP
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors: [ JauniKapauni ]
+website: https://github.com/JauniKapauni
