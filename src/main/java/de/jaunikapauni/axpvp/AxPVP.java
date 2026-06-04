@@ -36,6 +36,13 @@ public final class AxPVP extends JavaPlugin {
             new PVPPlaceholder(this).register();
             getLogger().info("Successfully registered AxPVP placeholders!");
         }
+        getLogger().info("");
+        getLogger().info("----------------------------------------");
+        getLogger().info("Name: " + getName());
+        getLogger().info("Version: " + getDescription().getVersion());
+        getLogger().info(String.join("Authors: " + ", ", getDescription().getAuthors()));
+        getLogger().info("----------------------------------------");
+        getLogger().info("");
     }
 
     @Override
