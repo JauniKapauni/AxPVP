@@ -5,6 +5,7 @@ import de.jaunikapauni.axpvp.listener.EntityDamageByEntityListener;
 import de.jaunikapauni.axpvp.listener.PlayerJoinListener;
 import de.jaunikapauni.axpvp.manager.DatabaseManager;
 import de.jaunikapauni.axpvp.manager.PlayerManager;
+import de.jaunikapauni.axpvp.placeholder.PVPPlaceholder;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,6 +32,10 @@ public final class AxPVP extends JavaPlugin {
         getCommand("pvp").setExecutor(new PVPCommand(this));
         getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new PVPPlaceholder(this).register();
+            getLogger().info("Successfully registered AxPVP placeholders!");
+        }
     }
 
     @Override
