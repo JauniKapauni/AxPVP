@@ -20,6 +20,10 @@ public class PVPCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
+        if(!p.hasPermission("axpvp.pvp")){
+            p.sendMessage("You don't have the permission! [axpvp.pvp]");
+            return true;
+        }
         boolean pvpStatus = reference.getPlayerManager().getPVPStatus(p);
         if(pvpStatus){
             reference.getPlayerManager().tooglePVPStatus(p);
