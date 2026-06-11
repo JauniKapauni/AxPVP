@@ -28,6 +28,9 @@ database:
   password:
 ```
 ---
+## Commands & Permissions
+- `/pvp` - `axpvp.pvp`
+---
 ## Support
 Discord: [AxForge](https://discord.gg/rYSxV4daS8)
 
