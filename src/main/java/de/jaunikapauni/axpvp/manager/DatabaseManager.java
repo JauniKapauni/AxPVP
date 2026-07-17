@@ -43,7 +43,7 @@ public class DatabaseManager {
 
     public boolean initDatabaseTable1(){
         try(Connection conn = getConnection()){
-            try(PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS players(uuid VARCHAR(255) PRIMARY KEY NOT NULL, pvp_status BOOLEAN)")){
+            try(PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS players(uuid VARCHAR(36) PRIMARY KEY NOT NULL, pvp_status BOOLEAN NOT NULL DEFAULT FALSE)")){
                 ps.executeUpdate();
                 return true;
             }
