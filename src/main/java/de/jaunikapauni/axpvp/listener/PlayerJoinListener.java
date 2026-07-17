@@ -20,5 +20,6 @@ public class PlayerJoinListener implements Listener {
         if(!reference.getPlayerManager().playerInDB(p)){
             reference.getPlayerManager().fillTable(p);
         }
+        reference.getPlayerManager().loadPlayer(p);
     }
 }
