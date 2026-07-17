@@ -32,6 +32,6 @@ public class PVPCommand implements CommandExecutor {
             reference.getPlayerManager().togglePVPStatus(p);
             p.sendActionBar("PVP enabled!");
         }
-        return false;
+        return true;
     }
 }
