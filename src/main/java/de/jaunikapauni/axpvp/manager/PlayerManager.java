@@ -1,6 +1,7 @@
 package de.jaunikapauni.axpvp.manager;
 
 import de.jaunikapauni.axpvp.AxPVP;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,22 +38,24 @@ public class PlayerManager {
     }
 
     public boolean getPVPStatus(Player p){
-        return cache.get(p.getUniqueId());
+        return cache.getOrDefault(p.getUniqueId(), false);
     }
 
     public boolean togglePVPStatus(Player p){
         UUID uuid = p.getUniqueId();
         boolean newStatus = !cache.get(uuid);
         cache.put(uuid, newStatus);
-        try(Connection conn = reference.getDatabaseManager().getConnection()){
-            try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET pvp_status = ? WHERE uuid = ?")){
-                ps.setBoolean(1, newStatus);
-                ps.setString(2, uuid.toString());
-                ps.executeUpdate();
+        Bukkit.getScheduler().runTaskAsynchronously(reference, () -> {
+            try(Connection conn = reference.getDatabaseManager().getConnection()){
+                try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET pvp_status = ? WHERE uuid = ?")){
+                    ps.setBoolean(1, newStatus);
+                    ps.setString(2, uuid.toString());
+                    ps.executeUpdate();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        });
         return newStatus;
     }
 

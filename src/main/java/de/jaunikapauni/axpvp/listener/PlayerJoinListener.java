@@ -1,6 +1,7 @@
 package de.jaunikapauni.axpvp.listener;
 
 import de.jaunikapauni.axpvp.AxPVP;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +18,15 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) throws SQLException {
         Player p = e.getPlayer();
-        if(!reference.getPlayerManager().playerInDB(p)){
-            reference.getPlayerManager().fillTable(p);
-        }
-        reference.getPlayerManager().loadPlayer(p);
+        Bukkit.getScheduler().runTaskAsynchronously(reference, () -> {
+            try {
+                if(!reference.getPlayerManager().playerInDB(p)){
+                    reference.getPlayerManager().fillTable(p);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            reference.getPlayerManager().loadPlayer(p);
+        });
     }
 }
