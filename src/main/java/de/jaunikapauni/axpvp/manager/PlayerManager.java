@@ -29,7 +29,7 @@ public class PlayerManager {
         return false;
     }
 
-    public void tooglePVPStatus(Player p){
+    public void togglePVPStatus(Player p){
         try(Connection conn = reference.getDatabaseManager().getConnection()){
             boolean pvpStatus = getPVPStatus(p);
             if(pvpStatus){

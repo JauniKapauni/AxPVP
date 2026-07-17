@@ -26,10 +26,10 @@ public class PVPCommand implements CommandExecutor {
         }
         boolean pvpStatus = reference.getPlayerManager().getPVPStatus(p);
         if(pvpStatus){
-            reference.getPlayerManager().tooglePVPStatus(p);
+            reference.getPlayerManager().togglePVPStatus(p);
             p.sendActionBar("PVP disabled!");
         } else {
-            reference.getPlayerManager().tooglePVPStatus(p);
+            reference.getPlayerManager().togglePVPStatus(p);
             p.sendActionBar("PVP enabled!");
         }
         return false;
